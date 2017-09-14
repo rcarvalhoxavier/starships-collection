@@ -11,7 +11,7 @@ function getAll(req, res, next) {
 //POST /starship operationId
 function save(req, res, next) {
     if (db.save(req.body)) {
-        res.json({ success: 1, description: "starship created!" });
+        res.json({ success: 1, description: "starship criada!" });
     } else {
         res.status(204).send();
     }
