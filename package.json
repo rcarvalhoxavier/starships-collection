@@ -13,7 +13,8 @@
     "js-yaml": "^3.10.0",
     "sequelize": "^4.8.3",
     "sqlite3": "^3.1.11",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.1.0",
+    "walk-sync": "^0.3.2"
   },
   "devDependencies": {
     "should": "^7.1.0",

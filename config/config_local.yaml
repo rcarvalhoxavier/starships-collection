@@ -1,3 +1,11 @@
 environment: local
 api:
   port: 10010
+db:  
+  username: devdb
+  password: qwerty123
+  database: devdb
+  host: localhost
+  wipe: true
+  dialect: sqlite
+  storage: memory
