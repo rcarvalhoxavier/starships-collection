@@ -1,0 +1,3 @@
+environment: local
+api:
+  port: 10010
