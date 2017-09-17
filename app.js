@@ -13,6 +13,9 @@ const app        = express();
 const env = process.env.NODE_ENV || 'local';
 const config = yaml.safeLoad(fs.readFileSync(`${appRoot}/config/config_${env}.yaml`, 'utf8'));
 
+console.log(env);
+console.log(process.env.port);
+
 app.set('view engine', 'html');
 app.set('views', 'public');
 app.set('port', config.api.port);
