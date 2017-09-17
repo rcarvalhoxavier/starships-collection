@@ -14,7 +14,8 @@ const env = process.env.NODE_ENV || 'local';
 const config = yaml.safeLoad(fs.readFileSync(`${appRoot}/config/config_${env}.yaml`, 'utf8'));
 
 console.log(env);
-console.log(process.env.port);
+console.log("port "+process.env.port);
+console.log("dirname"+ __dirname);
 
 app.set('view engine', 'html');
 app.set('views', 'public');

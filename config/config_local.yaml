@@ -1,6 +1,6 @@
 environment: local
 api:
-  port: 10010
+  port: 80
 db:  
   username: acjpbhfnsnlmqt
   password: d8dc387b9fed87d36af61a21fb7b7363da0bd7e9c1a6dd924cb4dba5811ffc7e
