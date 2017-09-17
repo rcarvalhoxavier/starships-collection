@@ -12,14 +12,15 @@ const app        = express();
 
 const env = process.env.NODE_ENV || 'local';
 const config = yaml.safeLoad(fs.readFileSync(`${appRoot}/config/config_${env}.yaml`, 'utf8'));
+const port = process.env.PORT || config.api.port;
 
 console.log(env);
-console.log("port "+process.env.port);
+console.log("port "+port);
 console.log("dirname"+ __dirname);
 
 app.set('view engine', 'html');
 app.set('views', 'public');
-app.set('port', config.api.port);
+app.set('port', port);
 
 // database
 db.sequelize.sync({ force : config.db.wipe }).then(() => {
@@ -28,8 +29,8 @@ db.sequelize.sync({ force : config.db.wipe }).then(() => {
 });
 
 // init server
-app.listen(config.api.port, () => {
-  console.log(`listening on port ${config.api.port}`); // eslint-disable-line no-console
+app.listen(port, () => {
+  console.log(`listening on port ${port}`); // eslint-disable-line no-console
 });
 
 

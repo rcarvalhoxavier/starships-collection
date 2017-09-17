@@ -10,4 +10,6 @@ db:
   dialect: postgres
   wipe: true
   logging: false
-  ssl: true
+  dialectOptions: {
+    ssl: true
+  }

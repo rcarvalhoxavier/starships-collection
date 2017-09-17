@@ -11,3 +11,6 @@ db:
   wipe: true
   logging: false
   ssl: true
+  dialectOptions: {
+    ssl: true
+  }
