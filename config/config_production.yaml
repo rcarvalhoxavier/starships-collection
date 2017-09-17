@@ -7,6 +7,7 @@ db:
   database: dffih14ufbpr6u
   host: ec2-50-19-105-113.compute-1.amazonaws.com
   port: 5432
-  dialect: postgre
+  dialect: postgres
   wipe: true
   logging: false
+  ssl: true
