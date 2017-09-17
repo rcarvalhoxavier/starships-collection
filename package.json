@@ -4,8 +4,8 @@
   "private": true,
   "description": "New Swagger API Project",
   "keywords": [],
-  "author": "",
-  "license": "",
+  "author": "Rodrigo Xavier",
+  "license": "MIT",
   "main": "app.js",
   "dependencies": {
     "app-root-path": "^2.0.1",
