@@ -11,6 +11,7 @@
     "app-root-path": "^2.0.1",
     "express": "^4.12.3",
     "js-yaml": "^3.10.0",
+    "pg": "^7.3.0",
     "sequelize": "^4.8.3",
     "sqlite3": "^3.1.11",
     "swagger-express-mw": "^0.1.0",
