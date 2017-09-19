@@ -12,11 +12,9 @@ const app        = express();
 
 const env = process.env.NODE_ENV || 'local';
 const config = yaml.safeLoad(fs.readFileSync(`${appRoot}/config/config_${env}.yaml`, 'utf8'));
-const port = process.env.PORT || config.api.port;
-
+const port = config.api.port || process.env.PORT;
 console.log(env);
 console.log("port "+port);
-console.log("dirname"+ __dirname);
 
 app.set('view engine', 'html');
 app.set('views', 'public');

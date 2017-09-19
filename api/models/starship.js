@@ -25,21 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             description: 'The hypermedia URL of this resource.'
-        },
-        created:
-        {
-            type: DataTypes.DATE,
-            allowNull: false,
-            description: 'The ISO 8601 date format of the time that this resource was created. 2012-04-23T18:25:43.511Z'
-        },
-        edited:
-        {
-            type: DataTypes.DATE,
-            allowNull: false,
-            description: 'the ISO 8601 date format of the time that this resource was edited. 2012-04-23T18:25:43.511Z'
         }
-
-
     });
 
     return model;

@@ -1,6 +1,6 @@
 environment: prod
 api:
-  port: 80
+  port: null
 db:
   username: acjpbhfnsnlmqt
   password: d8dc387b9fed87d36af61a21fb7b7363da0bd7e9c1a6dd924cb4dba5811ffc7e
@@ -8,7 +8,7 @@ db:
   host: ec2-50-19-105-113.compute-1.amazonaws.com
   port: 5432
   dialect: postgres
-  wipe: true
+  wipe: false
   logging: false
   ssl: true
   dialectOptions: {

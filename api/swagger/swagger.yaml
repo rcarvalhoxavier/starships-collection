@@ -19,7 +19,7 @@ produces:
   - application/json
 paths:
   /starships:
-    x-swagger-router-controller: starship
+    x-swagger-router-controller: starships
     get:
       operationId: getAll
       summary: Get all starships
@@ -55,8 +55,8 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse" 
             
-  /starshisp/{id}:
-    x-swagger-router-controller: starship
+  /starships/{id}:
+    x-swagger-router-controller: starships
     # our controller name
     get:
       operationId: get
@@ -71,7 +71,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GetStarshipResponse"
+            $ref: "#/definitions/Starship"
         default:
           description: Error
           schema:
@@ -156,14 +156,12 @@ definitions:
   Starship:        
     description: A Starship
     type: object
+    title: Starship
     required:
     - name
     - model
     - max_atmosphering_speed
-    - created
-    - edited
     - url
-    title: Starship
     properties:        
       model:
         type: string
@@ -180,14 +178,6 @@ definitions:
         type: string
         format: uri
         description: The hypermedia URL of this resource.
-      created:
-        type: string
-        format: date-time
-        description: The ISO 8601 date format of the time that this resource was created. 2012-04-23T18:25:43.511Z
-      edited:
-        type: string
-        format: date-time
-        description: the ISO 8601 date format of the time that this resource was edited. 2012-04-23T18:25:43.511Z
  # ---------------------------------------------------------#
  # models responses
  # ---------------------------------------------------------#     
@@ -217,44 +207,4 @@ definitions:
                 type: string
                 format: uri
                 description: The hypermedia URL of this resource.
-              created:
-                type: string
-                format: date-time
-                description: The ISO 8601 date format of the time that this resource was created. 2012-04-23T18:25:43.511Z
-              edited:
-                type: string
-                format: date-time
-                description: the ISO 8601 date format of the time that this resource was edited. 2012-04-23T18:25:43.511Z
             title: Starship
-  GetStarshipResponse:
-      required:
-        - starship
-      properties:
-        # The sharship
-        starship:
-            type: object
-            properties:
-              model:
-                type: string
-                description: The model or official name of this starship. Such as T-65 X-wing
-                  or DS-1 Orbital Battle Station.
-              max_atmosphering_speed:
-                type: string
-                description: The maximum speed of this starship in atmosphere. n/a if this starship
-                  is incapable of atmosphering flight.
-              name:
-                type: string
-                description: The name of this starship. The common name, such as Death Star.
-              url:
-                type: string
-                format: uri
-                description: The hypermedia URL of this resource.
-              created:
-                type: string
-                format: date-time
-                description: The ISO 8601 date format of the time that this resource was created. 2012-04-23T18:25:43.511Z
-              edited:
-                type: string
-                format: date-time
-                description: the ISO 8601 date format of the time that this resource was edited. 2012-04-23T18:25:43.511Z
-            title: Starship        
