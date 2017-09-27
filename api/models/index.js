@@ -20,11 +20,12 @@ const paths = walkSync(`${appRoot}/api/models`, {
 
 paths.forEach((file) => {
   const model    = sequelize.import(`${appRoot}/api/models/${file}`);
-  db[model.name] = model;
+  db[model.name] = model;  
 });
 
 Object.keys(db).forEach((modelName) => {
-  if (db[modelName].associate) {
+  console.log("associate" in db[modelName]);
+  if ("associate" in db[modelName]) {
     db[modelName].associate(db);
   }
 });

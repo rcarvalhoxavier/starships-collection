@@ -4,36 +4,24 @@ const appRoot = require('app-root-path');
 const StarshipRepository = require(`${appRoot}/api/repository/starship`);
 const FilmRepository = require(`${appRoot}/api/repository/film`);
 
-const _repository = new StarshipRepository();
+const _starshipRepository = new StarshipRepository();
 const _filmRepository = new FilmRepository();
 
-module.exports = { getAllStarships, saveStarship, get, update, deleteOne };
+module.exports = { getAllFilms, saveFilm, get, update, deleteOne };
 
 
-//POST /starship operationId
-function saveStarship(req, res, next) {
-    var starship = req.body;
-
-    var array = starship.films.map((item) => {
-        console.log(item);
-        return _filmRepository.get(item);
+//POST /film operationId
+function saveFilm(req, res, next) {        
+    _filmRepository.add(req.body).then((data) => {
+        res.json({ success: 1, description: "film criada!" });
+    }).catch((error) => {
+        res.status(204).json({ message: `${error}` });
     });
-    Promise.all(array).then(values => {
-        _repository.add(starship,values).then((data) => {
-            res.json({ success: 1, description: "starship criada!" });
-        }).catch((error) => {
-            res.status(204).json({ message: `${error}` });
-        });
-    }
-    );
-
-
-
 }
 
-//GET /starship operationId
-function getAllStarships(req, res, next) {
-    _repository.list().then((data) => {
+//GET /film operationId
+function getAllFilms(req, res, next) {
+    _filmRepository.list().then((data) => {
         res.json(data);
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });
@@ -43,7 +31,7 @@ function getAllStarships(req, res, next) {
 function get(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
     console.log(id);
-    _repository.get(id).then((data) => {
+    _filmRepository.get(id).then((data) => {
         console.log(data);
         if (data <= 0) {
             res.sendStatus(404);
@@ -56,15 +44,15 @@ function get(req, res, next) {
         });
 }
 
-//PUT /starship/{id} operationId
+//PUT /film/{id} operationId
 function update(req, res, next) {
-    var starship = req.body;
+    var film = req.body;
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-    _repository.update(id, starship).then((data) => {
+    _filmRepository.update(id, film).then((data) => {
         if (data <= 0) {
             res.status(404).json({ message: "Não encontrado" });
         } else {
-            res.json({ success: 1, description: "starship updated!" });
+            res.json({ success: 1, description: "film updated!" });
         }
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });
@@ -74,11 +62,11 @@ function update(req, res, next) {
 
 function deleteOne(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-    _repository.remove(id).then((data) => {
+    _filmRepository.remove(id).then((data) => {
         if (data <= 0) {
             res.status(404).json({ message: "Não encontrado" });
         } else {
-            res.json({ success: 1, description: "starship deleted!" });
+            res.json({ success: 1, description: "film deleted!" });
         }
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });

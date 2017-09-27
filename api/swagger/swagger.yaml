@@ -21,7 +21,7 @@ paths:
   /starships:
     x-swagger-router-controller: starships
     get:
-      operationId: getAll
+      operationId: getAllStarships
       summary: Get all starships
       description: get starships list
       responses:
@@ -34,7 +34,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
-      operationId: save
+      operationId: saveStarship
       summary: add new starship
       description: add a new starship to the list
       # movie info to be stored
@@ -54,7 +54,7 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse" 
-            
+  
   /starships/{id}:
     x-swagger-router-controller: starships
     # our controller name
@@ -120,7 +120,43 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"            
-    
+  
+  /films:
+    x-swagger-router-controller: films
+    get:
+      operationId: getAllFilms
+      summary: Get all films
+      description: get films list
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/GetFilmsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      operationId: saveFilm
+      summary: add new film
+      description: add a new film to the list
+      # movie info to be stored
+      parameters:
+        - name: model
+          description: Starship properties
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Film"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"     
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -160,24 +196,115 @@ definitions:
     required:
     - name
     - model
+    - manufacturer
+    - cost_in_credits
+    - length
     - max_atmosphering_speed
+    - crew
+    - passengers
+    - cargo_capacity
+    - consumables
+    - hyperdrive_rating
+    - MGLT
+    - starship_class
+    - films
     - url
     properties:        
+      hyperdrive_rating:
+        type: string
+        description: The class of this starships hyperdrive.
+      MGLT:
+        type: string
+        description: The Maximum number of Megalights this starship can travel in a standard
+          hour. A Megalight is a standard unit of distance and has never been defined
+          before within the Star Wars universe. This figure is only really useful for
+          measuring the difference in speed of starships. We can assume it is similar
+          to AU, the distance between our Sun (Sol) and Earth.
+      films:
+        type: array
+        description: An array of Film URL Resources that this starship has appeared in.
+        items: 
+          type: integer
       model:
         type: string
         description: The model or official name of this starship. Such as T-65 X-wing
           or DS-1 Orbital Battle Station.
+      cargo_capacity:
+        type: string
+        description: The maximum number of kilograms that this starship can transport.
       max_atmosphering_speed:
         type: string
         description: The maximum speed of this starship in atmosphere. n/a if this starship
           is incapable of atmosphering flight.
+      crew:
+        type: string
+        description: The number of personnel needed to run or pilot this starship.
+      consumables:
+        type: string
+        description: The maximum length of time that this starship can provide consumables
+          for its entire crew without having to resupply.
+      manufacturer:
+        type: string
+        description: The manufacturer of this starship. Comma seperated if more than one.
+      url:
+        type: string
+        description: The hypermedia URL of this resource.
+        format: uri
+      passengers:
+        type: string
+        description: The number of non-essential people this starship can transport.
+      length:
+        type: string
+        description: The length of this starship in meters.
+      starship_class:
+        type: string
+        description: The class of this starship, such as Starfighter or Deep Space Mobile
+          Battlestation.
       name:
         type: string
         description: The name of this starship. The common name, such as Death Star.
+      cost_in_credits:
+        type: string
+        description: The cost of this starship new, in galactic credits.
+ # ---------------------------------------------------------#
+ # Film      
+ # ---------------------------------------------------------#
+  Film:        
+    description: A Film
+    type: object
+    title: Film
+    required:
+    - title
+    - episode_id
+    - opening_crawl
+    - director
+    - producer
+    - release_date
+    - url
+    properties:        
+      episode_id:
+        type: integer
+        description: The episode number of this film.
+      director:
+        type: string
+        description: The director of this film.
+      opening_crawl:
+        type: string
+        description: The opening crawl text at the beginning of this film.
+      title:
+        type: string
+        description: The title of this film.
+      release_date:
+        type: string
+        description: The release date at original creator country.
+        format: date
       url:
         type: string
+        description: The url of this resource
         format: uri
-        description: The hypermedia URL of this resource.
+      producer:
+        type: string
+        description: The producer(s) of this film.
  # ---------------------------------------------------------#
  # models responses
  # ---------------------------------------------------------#     
@@ -190,21 +317,13 @@ definitions:
         starships:
           type: array
           items: 
-            type: object
-            properties:
-              model:
-                type: string
-                description: The model or official name of this starship. Such as T-65 X-wing
-                  or DS-1 Orbital Battle Station.
-              max_atmosphering_speed:
-                type: string
-                description: The maximum speed of this starship in atmosphere. n/a if this starship
-                  is incapable of atmosphering flight.
-              name:
-                type: string
-                description: The name of this starship. The common name, such as Death Star.
-              url:
-                type: string
-                format: uri
-                description: The hypermedia URL of this resource.
-            title: Starship
+            $ref: '#/definitions/Starship'
+  GetFilmsListResponse:
+      required:
+        - starships
+      properties:
+        # The array of sharship
+        starships:
+          type: array
+          items: 
+            $ref: '#/definitions/Film'            

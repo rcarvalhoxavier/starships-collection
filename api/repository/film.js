@@ -3,18 +3,14 @@
 const appRoot = require('app-root-path');
 const db = require(`${appRoot}/api/models`);
 
-class Starships {
+class Films {
 
-    add(starship, films) {
+    add(film) {
         return new Promise((resolve, reject) => {
-            db.Starship
-                .create(starship)
-                .then((starship,res) => {
-                    console.log(films);
-                    starship.addFilms(films).then((res) => {
-                        console.log("resolve");
-                        resolve(res);
-                    })
+            db.Film
+                .create(film)
+                .then((res) => {
+                    resolve(res);
                 })
                 .catch((error) => {
                     reject(error);
@@ -24,7 +20,7 @@ class Starships {
 
     list() {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Film
                 .findAll()
                 .then((res) => {
                     resolve(res);
@@ -37,16 +33,16 @@ class Starships {
 
     get(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Film
                 .findOne({
                     where: {
                         id: _id
                     }
                 })
-                .then((res) => {
+                .then((res) => {                    
                     resolve(res);
                 })
-                .catch((error) => {
+                .catch((error) => {                    
                     reject(error);
                 });
         });
@@ -54,21 +50,21 @@ class Starships {
 
     remove(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship.destroy({
-                where: {
-                    id: _id
-                }
-            }).then((res) => {
-                resolve(res);
-            }).catch((error) => {
-                reject(error);
-            });
+            db.Film.destroy({
+                    where: {
+                        id: _id
+                    }
+                }).then((res) => {
+                    resolve(res);
+                }).catch((error) => {
+                    reject(error);
+                });
         });
     }
 
     update(_id, data) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Film
                 .update(data, {
                     where: {
                         id: _id
@@ -83,4 +79,4 @@ class Starships {
         });
     }
 }
-module.exports = Starships;
+module.exports = Films;
