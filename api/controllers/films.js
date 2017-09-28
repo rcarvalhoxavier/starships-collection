@@ -7,7 +7,7 @@ const FilmRepository = require(`${appRoot}/api/repository/film`);
 const _starshipRepository = new StarshipRepository();
 const _filmRepository = new FilmRepository();
 
-module.exports = { getAllFilms, saveFilm, get, update, deleteOne };
+module.exports = { getAllFilms, saveFilm, getFilm, update, deleteOne };
 
 
 //POST /film operationId
@@ -28,7 +28,7 @@ function getAllFilms(req, res, next) {
     });
 }
 
-function get(req, res, next) {
+function getFilm(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
     console.log(id);
     _filmRepository.get(id).then((data) => {

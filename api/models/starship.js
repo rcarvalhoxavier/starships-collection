@@ -77,7 +77,6 @@ module.exports = (sequelize, DataTypes) => {
     }
 
   });
-
   model.associate = function (models) {
     model.belongsToMany(models.Film, { through: 'FilmStarship' });
   }

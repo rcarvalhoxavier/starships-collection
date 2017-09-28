@@ -34,11 +34,10 @@ class Films {
     get(_id) {
         return new Promise((resolve, reject) => {
             db.Film
-                .findOne({
-                    where: {
-                        id: _id
-                    }
-                })
+                .findOne(
+                    {where: {id :_id}} ,
+                    { include: [{ all: true }]}
+                )
                 .then((res) => {                    
                     resolve(res);
                 })

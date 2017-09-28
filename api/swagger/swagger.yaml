@@ -157,6 +157,28 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"     
+            
+  /films/{id}:
+    x-swagger-router-controller: films
+    # our controller name
+    get:
+      operationId: getFilm
+      description: get a film
+      # define the type of response for Success "200" and Error
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Film"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                      
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -207,7 +229,6 @@ definitions:
     - hyperdrive_rating
     - MGLT
     - starship_class
-    - films
     - url
     properties:        
       hyperdrive_rating:
@@ -220,11 +241,6 @@ definitions:
           before within the Star Wars universe. This figure is only really useful for
           measuring the difference in speed of starships. We can assume it is similar
           to AU, the distance between our Sun (Sol) and Earth.
-      films:
-        type: array
-        description: An array of Film URL Resources that this starship has appeared in.
-        items: 
-          type: integer
       model:
         type: string
         description: The model or official name of this starship. Such as T-65 X-wing
@@ -266,6 +282,10 @@ definitions:
       cost_in_credits:
         type: string
         description: The cost of this starship new, in galactic credits.
+      films:
+          type: array
+          items: 
+            type: integer
  # ---------------------------------------------------------#
  # Film      
  # ---------------------------------------------------------#
@@ -305,6 +325,10 @@ definitions:
       producer:
         type: string
         description: The producer(s) of this film.
+      starships:
+          type: array
+          items: 
+            type: integer
  # ---------------------------------------------------------#
  # models responses
  # ---------------------------------------------------------#     
@@ -320,10 +344,10 @@ definitions:
             $ref: '#/definitions/Starship'
   GetFilmsListResponse:
       required:
-        - starships
+        - films
       properties:
         # The array of sharship
-        starships:
+        films:
           type: array
           items: 
             $ref: '#/definitions/Film'            
