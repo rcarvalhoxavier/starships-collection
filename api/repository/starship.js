@@ -10,9 +10,7 @@ class Starships {
             db.Starship
                 .create(starship)
                 .then((starship, res) => {
-                    console.log(films);
                     starship.addFilms(films).then((res) => {
-                        console.log("resolve");
                         resolve(res);
                     })
                 })
@@ -66,19 +64,19 @@ class Starships {
         });
     }
 
-    update(_id, data,films) {
+    update(_id, data, films) {
         return new Promise((resolve, reject) => {
             db.Starship
                 .update(data, {
                     where: { id: _id }
                 }).then((res) => {
-                    this.get(_id).then((starship) =>{
-                        console.log(starship);
+                    this.get(_id).then((starship) => {
                         starship.setFilms(films).then((res) => {
-                            console.log("resolve");
                             resolve(res);
                         })
-                    });                    
+                    }).catch((error) => {
+                        reject(error);
+                    });
                 })
                 .catch((error) => {
                     reject(error);
