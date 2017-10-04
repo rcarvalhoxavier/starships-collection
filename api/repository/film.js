@@ -50,6 +50,22 @@ class Films {
         });
     }
 
+    getByUrl(_url) {
+        return new Promise((resolve, reject) => {
+            db.Film
+                .findOne(
+                {
+                    where: { url: _url }
+                })
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
     remove(_id) {
         return new Promise((resolve, reject) => {
             db.Film.destroy({
@@ -72,13 +88,18 @@ class Films {
                         id: _id
                     }
                 }).then((res) => {
-                    this.get(_id).then((film) => {
-                        film.setStarships(starships).then((res) => {
-                            resolve(res);
-                        })
-                    }).catch((error) => {
-                        reject(error);
-                    });
+                    if (starships != undefined)
+                        this.get(_id).then((film) => {
+                            film.setStarships(starships).then((res) => {
+                                resolve(res);
+                            }).catch((error) => {
+                                reject(error);
+                            });
+                        }).catch((error) => {
+                            reject(error);
+                        });
+                    else
+                        resolve(res);
                 })
                 .catch((error) => {
                     reject(error);

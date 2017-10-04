@@ -1,6 +1,6 @@
 {
   "name": "starships-collecion",
-  "version": "0.0.1",
+  "version": "0.4.1",
   "private": true,
   "description": "New Swagger API Project",
   "keywords": [],
@@ -12,9 +12,11 @@
     "express": "^4.12.3",
     "js-yaml": "^3.10.0",
     "pg": "^7.3.0",
+    "request": "^2.67.0",
     "sequelize": "^4.8.3",
     "sqlite3": "^3.1.11",
     "swagger-express-mw": "^0.1.0",
+    "swapi-node": "^0.4.3",
     "walk-sync": "^0.3.2"
   },
   "devDependencies": {

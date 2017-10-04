@@ -179,6 +179,23 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"                      
+            
+  /seeds:
+    x-swagger-router-controller: seeds
+    get:
+      operationId: populate
+      summary: populate db
+      description: populate all db
+      responses:
+            "200":
+              description: Success
+              schema:
+                $ref: "#/definitions/GeneralResponse"
+            default:
+              description: Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"     
+    
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

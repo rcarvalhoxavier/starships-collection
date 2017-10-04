@@ -10,9 +10,12 @@ class Starships {
             db.Starship
                 .create(starship)
                 .then((starship, res) => {
-                    starship.addFilms(films).then((res) => {
+                    if (films != undefined)
+                        starship.addFilms(films).then((res) => {
+                            resolve(res);
+                        });
+                    else
                         resolve(res);
-                    })
                 })
                 .catch((error) => {
                     reject(error);
@@ -50,6 +53,23 @@ class Starships {
         });
     }
 
+    getByUrl(_url) {
+        return new Promise((resolve, reject) => {
+            db.Starship
+                .findOne(
+                {
+                    include: [db.Film],
+                    where: { url: _url }
+                })
+                .then((res) => {
+                    resolve(res);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
     remove(_id) {
         return new Promise((resolve, reject) => {
             db.Starship.destroy({
@@ -70,13 +90,18 @@ class Starships {
                 .update(data, {
                     where: { id: _id }
                 }).then((res) => {
-                    this.get(_id).then((starship) => {
-                        starship.setFilms(films).then((res) => {
-                            resolve(res);
-                        })
-                    }).catch((error) => {
-                        reject(error);
-                    });
+                    if (films != undefined)
+                        this.get(_id).then((starship) => {
+                            starship.setFilms(films).then((res) => {
+                                resolve(res);
+                            }).catch((error) => {
+                                reject(error);
+                            });
+                        }).catch((error) => {
+                            reject(error);
+                        });
+                    else
+                        resolve(res);
                 })
                 .catch((error) => {
                     reject(error);

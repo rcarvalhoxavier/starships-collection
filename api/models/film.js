@@ -5,7 +5,7 @@ const appRoot = require('app-root-path');
 module.exports = (sequelize, DataTypes) => {
   const model = sequelize.define('Film', {
     opening_crawl: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       description: 'The opening crawl text at the beginning of this film.'
     },
     release_date: {
