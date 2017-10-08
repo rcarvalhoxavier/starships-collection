@@ -9,14 +9,18 @@ class Films {
         return new Promise((resolve, reject) => {
             db.Film
                 .create(film).then((film, res) => {
-                    film.addStarships(starships).then((res) => {
+                    if (starships != undefined && starships.length > 0) {
+                        film.addStarships(starships).then((res) => {
+                            resolve(res);
+                        }).catch((error) => {
+                            reject(error);
+                        });
+                    } else
                         resolve(res);
-                    }).catch((error) => {
-                        reject(error);
-                    });
                 }).catch((error) => {
                     reject(error);
                 });
+
         });
     }
 
@@ -88,7 +92,7 @@ class Films {
                         id: _id
                     }
                 }).then((res) => {
-                    if (starships != undefined)
+                    if (starships != undefined && starships.length > 0) {
                         this.get(_id).then((film) => {
                             film.setStarships(starships).then((res) => {
                                 resolve(res);
@@ -98,6 +102,7 @@ class Films {
                         }).catch((error) => {
                             reject(error);
                         });
+                    }
                     else
                         resolve(res);
                 })

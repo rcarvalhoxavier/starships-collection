@@ -9,11 +9,12 @@ class Starships {
         return new Promise((resolve, reject) => {
             db.Starship
                 .create(starship)
-                .then((starship, res) => {
-                    if (films != undefined)
+                .then((starship, res) => {                                             
+                    if (films != undefined && films.length > 0) {                        
                         starship.addFilms(films).then((res) => {
                             resolve(res);
                         });
+                    }
                     else
                         resolve(res);
                 })
@@ -90,7 +91,7 @@ class Starships {
                 .update(data, {
                     where: { id: _id }
                 }).then((res) => {
-                    if (films != undefined)
+                    if (films != undefined && films > 0) {
                         this.get(_id).then((starship) => {
                             starship.setFilms(films).then((res) => {
                                 resolve(res);
@@ -100,6 +101,7 @@ class Starships {
                         }).catch((error) => {
                             reject(error);
                         });
+                    }
                     else
                         resolve(res);
                 })
