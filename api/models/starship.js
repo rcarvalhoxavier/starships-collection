@@ -79,9 +79,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   model.associate = function (models) {
     model.belongsToMany(models.Film, { through: 'FilmStarship' });
+    model.belongsToMany(models.People,{through: 'StarshipPeople'});
   }
-
-  // model.belongsToMany(People,{as: 'Pilots',through: 'PeopleStarship'});
-
   return model;
 };
