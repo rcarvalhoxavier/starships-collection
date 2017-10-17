@@ -179,6 +179,31 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"                      
+    put:
+      operationId: updateFilm
+      description: update a film
+      # define the parameters
+      parameters:
+        - name: id
+          description: Film id
+          type: string
+          in: path
+          required: true
+        - name: model
+          description: Film properties
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Film"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"               
             
   /seeds:
     x-swagger-router-controller: seeds

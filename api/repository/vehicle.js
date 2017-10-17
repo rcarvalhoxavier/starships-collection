@@ -3,16 +3,14 @@
 const appRoot = require('app-root-path');
 const db = require(`${appRoot}/api/models`);
 
-class Starships {
+class Vehicles {
 
     add(entity) {
         return new Promise((resolve, reject) => {
-            db.Starship
-                .create(entity)
-                .then((res) => {
+            db.Vehicle
+                .create(entity).then((res) => {
                     resolve(res);
-                })
-                .catch((error) => {
+                }).catch((error) => {
                     reject(error);
                 });
         });
@@ -20,7 +18,7 @@ class Starships {
 
     list() {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Vehicle
                 .findAll()
                 .then((res) => {
                     resolve(res);
@@ -33,10 +31,10 @@ class Starships {
 
     get(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Vehicle
                 .findOne(
                 {
-                    include: [{ all: true }],
+                    include: [db.Film],
                     where: { id: _id }
                 })
                 .then((res) => {
@@ -50,7 +48,7 @@ class Starships {
 
     getByUrl(_url) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.Vehicle
                 .findOne(
                 {
                     where: { url: _url }
@@ -66,7 +64,7 @@ class Starships {
 
     remove(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship.destroy({
+            db.Vehicle.destroy({
                 where: {
                     id: _id
                 }
@@ -80,7 +78,7 @@ class Starships {
 
     update(_id, data, films) {
         return new Promise((resolve, reject) => {
-            db.Film
+            db.Vehicle
                 .update(data, {
                     where: {
                         id: _id
@@ -109,4 +107,4 @@ class Starships {
         });
     }
 }
-module.exports = Starships;
+module.exports = Vehicles;

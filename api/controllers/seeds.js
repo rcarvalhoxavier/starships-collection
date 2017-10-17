@@ -127,14 +127,17 @@ function buildFilmRelationship() {
                     });
                     Promise.all(starshipsPromises).then((starships) => {
                         console.log("build relationship");
-                        return _filmRepository.update(film.id, film, starships);
+                        return _filmRepository.update(film.id, film, undefined, undefined, starships, undefined, undefined);
                     });
                 }).then((data) => {
                     if (data <= 0)
                         reject();
                     else
                         resolve();
-                });;
+                }).catch((error) => {
+                    console.log(error);
+                    throw error;
+                });
             }, this);
         });      
     });

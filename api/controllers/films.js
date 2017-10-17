@@ -46,15 +46,25 @@ function getFilm(req, res, next) {
 function updateFilm(req, res, next) {
     var film = req.body;
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-    _filmRepository.update(id, film).then((data) => {
-        if (data <= 0) {
-            res.status(404).json({ message: "Não encontrado" });
-        } else {
-            res.json({ success: 1, description: "film updated!" });
-        }
+    
+    var array = film.starships.map((item) => {
+        //console.log(item);
+        return _starshipRepository.get(item);
+    });
+    Promise.all(array).then(values => {
+        _filmRepository.update(id, film, undefined, undefined, values, undefined, undefined).then((data) => {
+            if (data <= 0) {
+                res.status(404).json({ message: "Não encontrado" });
+            } else {
+                res.json({ success: 1, description: "film updated!" });
+            }
+        }).catch((error) => {
+            res.status(400).json({ message: `${error}` });
+        });
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });
     });
+
 
 }
 

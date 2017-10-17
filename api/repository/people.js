@@ -3,16 +3,14 @@
 const appRoot = require('app-root-path');
 const db = require(`${appRoot}/api/models`);
 
-class Starships {
+class People {
 
     add(entity) {
         return new Promise((resolve, reject) => {
-            db.Starship
-                .create(entity)
-                .then((res) => {
+            db.People
+                .create(entity).then((res) => {
                     resolve(res);
-                })
-                .catch((error) => {
+                }).catch((error) => {
                     reject(error);
                 });
         });
@@ -20,7 +18,7 @@ class Starships {
 
     list() {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.People
                 .findAll()
                 .then((res) => {
                     resolve(res);
@@ -33,7 +31,7 @@ class Starships {
 
     get(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.People
                 .findOne(
                 {
                     include: [{ all: true }],
@@ -50,7 +48,7 @@ class Starships {
 
     getByUrl(_url) {
         return new Promise((resolve, reject) => {
-            db.Starship
+            db.People
                 .findOne(
                 {
                     where: { url: _url }
@@ -66,7 +64,7 @@ class Starships {
 
     remove(_id) {
         return new Promise((resolve, reject) => {
-            db.Starship.destroy({
+            db.People.destroy({
                 where: {
                     id: _id
                 }
@@ -78,9 +76,9 @@ class Starships {
         });
     }
 
-    update(_id, data, films) {
+    update(_id, data, films, planet, starships, vehicles, species) {
         return new Promise((resolve, reject) => {
-            db.Film
+            db.People
                 .update(data, {
                     where: {
                         id: _id
@@ -90,9 +88,17 @@ class Starships {
                         resolve(res);
                     else {
                         var promiseList = [];
-                        this.get(_id).then((entity) => {                            
+                        this.get(_id).then((people) => {
+                            if (starships != undefined && starships.length > 0)
+                                promiseList.push(people.setStarships(starships));
                             if (films != undefined && films.length > 0)
-                                promiseList.push(entity.setFilms(films));                            
+                                promiseList.push(people.setFilms(films));
+                            if (planet != undefined && planet.length > 0)
+                                promiseList.push(people.setPlanet(planet));
+                            if (vehicles != undefined && vehicles.length > 0)
+                                promiseList.push(people.setVehicles(vehicles));
+                            if (species != undefined && species.length > 0)
+                                promiseList.push(people.setSpecies(species));
                             Promise.all(promiseList).then(() => {
                                 resolve(res);
                             }).catch((error) => {
@@ -107,6 +113,7 @@ class Starships {
                     reject(error);
                 });
         });
+
     }
 }
-module.exports = Starships;
+module.exports = People;

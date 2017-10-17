@@ -5,18 +5,11 @@ const db = require(`${appRoot}/api/models`);
 
 class Films {
 
-    add(film, starships) {
+    add(entity, starships) {
         return new Promise((resolve, reject) => {
             db.Film
-                .create(film).then((film, res) => {
-                    if (starships != undefined && starships.length > 0) {
-                        film.addStarships(starships).then((res) => {
-                            resolve(res);
-                        }).catch((error) => {
-                            reject(error);
-                        });
-                    } else
-                        resolve(res);
+                .create(entity).then((res) => {
+                    resolve(res);
                 }).catch((error) => {
                     reject(error);
                 });
@@ -42,7 +35,7 @@ class Films {
             db.Film
                 .findOne(
                 {
-                    include: [db.Starship],
+                    include: [{ all: true }],
                     where: { id: _id }
                 })
                 .then((res) => {
@@ -84,7 +77,7 @@ class Films {
         });
     }
 
-    update(_id, data, starships) {
+    update(_id, data, people, planets, starships, vehicles, species) {
         return new Promise((resolve, reject) => {
             db.Film
                 .update(data, {
@@ -92,9 +85,22 @@ class Films {
                         id: _id
                     }
                 }).then((res) => {
-                    if (starships != undefined && starships.length > 0) {
-                        this.get(_id).then((film) => {
-                            film.setStarships(starships).then((res) => {
+                    if (res <= 0)
+                        resolve(res);
+                    else {
+                        var promiseList = [];
+                        this.get(_id).then((entity) => {
+                            if (starships != undefined && starships.length > 0)
+                                promiseList.push(entity.setStarships(starships));
+                            if (people != undefined && people.length > 0)
+                                promiseList.push(entity.setPeople(people));
+                            if (planets != undefined && planets.length > 0)
+                                promiseList.push(entity.setPlanets(planets));
+                            if (vehicles != undefined && vehicles.length > 0)
+                                promiseList.push(entity.setVehicles(vehicles));
+                            if (species != undefined && species.length > 0)
+                                promiseList.push(entity.setSpecies(species));
+                            Promise.all(promiseList).then(() => {
                                 resolve(res);
                             }).catch((error) => {
                                 reject(error);
@@ -103,8 +109,6 @@ class Films {
                             reject(error);
                         });
                     }
-                    else
-                        resolve(res);
                 })
                 .catch((error) => {
                     reject(error);
