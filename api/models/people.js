@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             description: 'The model or official name of this vehicle. Such as All Terrain Attack Transport.'
         },
         mass: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             description: 'The cost of this vehicle new, in galactic credits.'
         },
         hair_color: {
@@ -42,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
         height: {
             type: DataTypes.STRING,
             description: 'The model or official name of this vehicle. Such as All Terrain Attack Transport.'
+        },
+        url: {
+          type: DataTypes.STRING,
+          description: 'The url of this resource',
+          format: 'uri'
         }
 
     });
