@@ -34,7 +34,7 @@ class People {
             db.People
                 .findOne(
                 {
-                    include: [{ all: true }],
+                    include: [ db.Starship, db.Film, db.Planet, db.Vehicle, db.Specie ],
                     where: { id: _id }
                 })
                 .then((res) => {
@@ -93,7 +93,7 @@ class People {
                                 promiseList.push(people.setStarships(starships));
                             if (films != undefined && films.length > 0)
                                 promiseList.push(people.setFilms(films));
-                            if (planet != undefined && planet.length > 0)
+                            if (planet != undefined && planet != null)
                                 promiseList.push(people.setPlanet(planet));
                             if (vehicles != undefined && vehicles.length > 0)
                                 promiseList.push(people.setVehicles(vehicles));

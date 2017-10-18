@@ -366,11 +366,7 @@ definitions:
         format: uri
       producer:
         type: string
-        description: The producer(s) of this film.
-      starships:
-          type: array
-          items: 
-            type: integer
+        description: The producer(s) of this film. 
  # ---------------------------------------------------------#
  # models responses
  # ---------------------------------------------------------#     

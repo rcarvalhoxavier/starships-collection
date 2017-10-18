@@ -35,6 +35,7 @@ function getFilm(req, res, next) {
         if (data <= 0) {
             res.sendStatus(404);
         } else {
+            console.log(data);
             res.json(data);
         }
     }).catch((error) => {

@@ -36,7 +36,7 @@ class Starships {
             db.Starship
                 .findOne(
                 {
-                    include: [{ all: true }],
+                    include: [ db.Films, db.People ],
                     where: { id: _id }
                 })
                 .then((res) => {

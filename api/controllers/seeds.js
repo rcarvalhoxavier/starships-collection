@@ -45,7 +45,7 @@ function populate(req, res, next) {
             console.log("resolve ");
             return Promise.all([
                 buildFilmRelationshipFilm(),
-                buildFilmRelationshipPeople(),
+              //  buildFilmRelationshipPeople(),
                 buildFilmRelationshipSpecie()])
         }).then(() => {
             res.json({ success: 1, description: "populate executado com sucesso!" });

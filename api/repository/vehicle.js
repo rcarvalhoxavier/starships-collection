@@ -34,7 +34,7 @@ class Vehicles {
             db.Vehicle
                 .findOne(
                 {
-                    include: [db.Film],
+                    include: [ db.Film, db.People],
                     where: { id: _id }
                 })
                 .then((res) => {

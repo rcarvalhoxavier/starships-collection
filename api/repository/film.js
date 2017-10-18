@@ -34,11 +34,12 @@ class Films {
         return new Promise((resolve, reject) => {
             db.Film
                 .findOne(
-                {
-                    include: [{ all: true }],
-                    where: { id: _id }
+                {                   
+                    where: { id: _id },
+                    include: [ db.Starship, db.People, db.Planet, db.Vehicle, db.Specie ]
                 })
                 .then((res) => {
+                    console.log(res);
                     resolve(res);
                 })
                 .catch((error) => {
@@ -90,7 +91,7 @@ class Films {
                     else {
                         var promiseList = [];
                         this.get(_id).then((entity) => {
-                            if (starships != undefined && starships.length > 0)                             
+                            if (starships != undefined && starships.length > 0)
                                 promiseList.push(entity.setStarships(starships));
                             if (people != undefined && people.length > 0)
                                 promiseList.push(entity.setPeople(people));
