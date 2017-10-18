@@ -43,8 +43,13 @@ function populate(req, res, next) {
             callURLEntity(BASE_URL + vehicleUrl, "vehicle")
         ]).then(() => {
             console.log("resolve ");
-            buildFilmRelationship();
-            res.json({ success: 1, description: "starship criada!" });
+            return Promise.all([
+                buildFilmRelationshipFilm(),
+                buildFilmRelationshipPeople(),
+                buildFilmRelationshipSpecie()])
+        }).then(() => {
+            res.json({ success: 1, description: "populate executado com sucesso!" });
+
         }).catch((err) => {
             console.log(err);
             throw err;
@@ -183,7 +188,7 @@ function saveVehicle(element) {
     });
 }
 
-function buildFilmRelationship() {
+function buildFilmRelationshipFilm() {
     new Promise((resolve, reject) => {
         _filmRepository.list().then((films) => {
             films.forEach(function (film) {
@@ -214,6 +219,69 @@ function buildFilmRelationship() {
                         var species = _.compact(results[4]);
 
                         return _filmRepository.update(film.id, film, people, planets, starships, vehicles, species);
+                    });
+                }).then((data) => {
+                    if (data <= 0)
+                        reject();
+                    else
+                        resolve();
+                }).catch((error) => {
+                    console.log(error);
+                    throw error;
+                });
+            }, this);
+        });
+    });
+}
+
+function buildFilmRelationshipPeople() {
+    new Promise((resolve, reject) => {
+        _peopleRepository.list().then((entity) => {
+            entity.forEach(function (item) {
+                swapi.get(item.url).then((result) => {
+                    //console.log(result.starships);
+                    var promiseList = [];
+                    promiseList.push(Promise.all(result.starships.map((_url) => {
+                        return _starshipRepository.getByUrl(_url);
+                    })));
+                    promiseList.push(_planetRepository.getByUrl(result.homeworld));
+                    promiseList.push(Promise.all(result.vehicles.map((_url) => {
+                        return _vehicleRepository.getByUrl(_url);
+                    })));
+                    promiseList.push(Promise.all(result.species.map((_url) => {
+                        return _specieRepository.getByUrl(_url);
+                    })));
+                    Promise.all(promiseList).then((results) => {
+                        console.log("build relationship people");
+                        var starships = _.compact(results[0]);
+                        var planet = results[1];
+                        var vehicles = _.compact(results[2]);
+                        var species = _.compact(results[3]);
+
+                        return _peopleRepository.update(item.id, item, undefined, planet, starships, vehicles, species);
+                    });
+                }).then((data) => {
+                    if (data <= 0)
+                        reject();
+                    else
+                        resolve();
+                }).catch((error) => {
+                    console.log(error);
+                    throw error;
+                });
+            }, this);
+        });
+    });
+}
+
+function buildFilmRelationshipSpecie() {
+    new Promise((resolve, reject) => {
+        _specieRepository.list().then((entity) => {
+            entity.forEach(function (item) {
+                swapi.get(item.url).then((result) => {
+                    _planetRepository.getByUrl(result.homeworld).then((planet) => {
+                        console.log("build relationship specie");
+                        return _specieRepository.update(item.id, item, undefined, planet, undefined);
                     });
                 }).then((data) => {
                     if (data <= 0)
