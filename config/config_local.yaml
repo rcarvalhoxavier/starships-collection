@@ -8,8 +8,8 @@ db:
   host: 127.0.0.1
   port: 5432
   dialect: postgres
-  wipe: true
-  logging: false
+  wipe: false
+  logging: true
   dialectOptions: {
     ssl: false
   }

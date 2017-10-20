@@ -34,12 +34,37 @@ class Films {
         return new Promise((resolve, reject) => {
             db.Film
                 .findOne(
-                {                   
+                {
                     where: { id: _id },
-                    include: [ db.Starship, db.People, db.Planet, db.Vehicle, db.Specie ]
+                    include: [
+                        {
+                            model: db.Starship,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Specie,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Planet,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.People,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Vehicle,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        }
+                    ]
                 })
                 .then((res) => {
-                    console.log(res);
                     resolve(res);
                 })
                 .catch((error) => {

@@ -34,7 +34,17 @@ class Planets {
             db.Planet
                 .findOne(
                 {
-                    include: [ db.People, db.Film ],
+                    include: [ 
+                        {
+                            model: db.People,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Film,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        }],
                     where: { id: _id }
                 })
                 .then((res) => {

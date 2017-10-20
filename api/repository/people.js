@@ -34,7 +34,32 @@ class People {
             db.People
                 .findOne(
                 {
-                    include: [ db.Starship, db.Film, db.Planet, db.Vehicle, db.Specie ],
+                    include: [ 
+                        {
+                            model: db.Starship,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Film,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Planet,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Vehicle,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        },
+                        {
+                            model: db.Specie,
+                            require: false,
+                            attributes: ['id', 'name', 'url']
+                        }],
                     where: { id: _id }
                 })
                 .then((res) => {

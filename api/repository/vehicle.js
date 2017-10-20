@@ -34,7 +34,16 @@ class Vehicles {
             db.Vehicle
                 .findOne(
                 {
-                    include: [ db.Film, db.People],
+                    include: [{
+                        model: db.Film,
+                        require: false,
+                        attributes: ['id', 'name', 'url']
+                    },
+                    {
+                        model: db.People,
+                        require: false,
+                        attributes: ['id', 'name', 'url']
+                    }],
                     where: { id: _id }
                 })
                 .then((res) => {
@@ -88,9 +97,9 @@ class Vehicles {
                         resolve(res);
                     else {
                         var promiseList = [];
-                        this.get(_id).then((entity) => {                            
+                        this.get(_id).then((entity) => {
                             if (films != undefined && films.length > 0)
-                                promiseList.push(entity.setFilms(films));                            
+                                promiseList.push(entity.setFilms(films));
                             Promise.all(promiseList).then(() => {
                                 resolve(res);
                             }).catch((error) => {
