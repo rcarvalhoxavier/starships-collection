@@ -71,7 +71,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "http://localhost:8080/starship.yaml#/Starship"
+            $ref: "starship.yaml#/Starship"
         default:
           description: Error
           schema:
