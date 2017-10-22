@@ -71,7 +71,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "starship.yaml#/Starship"
+            $ref: api/swagger/starship.yaml#/Starship
         default:
           description: Error
           schema:
