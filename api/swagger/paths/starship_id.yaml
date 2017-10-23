@@ -1,0 +1,64 @@
+x-swagger-router-controller: starships
+# our controller name
+get:
+  operationId: getStarship
+  description: get a starship
+  # define the type of response for Success "200" and Error
+  parameters:
+    - name: id
+      type: string
+      in: path
+      required: true
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/starship.yaml#/Starship" 
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"
+put:
+  operationId: updateStarship
+  description: update a starship
+  # define the parameters
+  parameters:
+    - name: id
+      description: Starship id
+      type: string
+      in: path
+      required: true
+    - name: model
+      description: Starship properties
+      in: body
+      required: true
+      schema:
+        $ref: "../models/starship.yaml#/StarshipWithRelationship"
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/responses.yaml#/GeneralResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"
+delete:
+  operationId: deleteStarship
+  description: delete a starship
+  # define the parameters
+  parameters:
+    - name: id
+      description: Starship id
+      type: string
+      in: path
+      required: true
+  responses: 
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/responses.yaml#/GeneralResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"

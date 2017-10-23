@@ -1,0 +1,35 @@
+x-swagger-router-controller: starships
+get:
+  operationId: getStarships
+  summary: Get all starships
+  description: get starships list
+  responses:
+    200:
+      description: Success
+      schema:
+        $ref: "../models/starship.yaml#/GetStarshipsListResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"
+post:
+  operationId: saveStarship
+  summary: add new starship
+  description: add a new starship to the list 
+  # movie info to be stored
+  parameters:
+    - name: model
+      description: Starship properties
+      in: body
+      required: true
+      schema:
+        $ref: "../models/starship.yaml#/Starship"
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/responses.yaml#/GeneralResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"

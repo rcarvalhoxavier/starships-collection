@@ -9,7 +9,7 @@ basePath: /
 # 
 schemes:
   # tip: remove http to make production-grade
-  - http
+  - http 
   - https
 # format of bodies a client can send (Content-Type)
 consumes:
@@ -18,109 +18,10 @@ consumes:
 produces:
   - application/json
 paths:
-  /starships:
-    x-swagger-router-controller: starships
-    get:
-      operationId: getStarships
-      summary: Get all starships
-      description: get starships list
-      responses:
-        200:
-          description: Success
-          schema:
-            $ref: "#/definitions/GetStarshipsListResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-    post:
-      operationId: saveStarship
-      summary: add new starship
-      description: add a new starship to the list
-      # movie info to be stored
-      parameters:
-        - name: model
-          description: Starship properties
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Starship"
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GeneralResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse" 
-  
+  /starship:
+    $ref: api/swagger/paths/starship.yaml
   /starships/{id}:
-    x-swagger-router-controller: starships
-    # our controller name
-    get:
-      operationId: getStarship
-      description: get a starship
-      # define the type of response for Success "200" and Error
-      parameters:
-        - name: id
-          type: string
-          in: path
-          required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: api/swagger/starship.yaml#/Starship
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"          
-    put:
-      operationId: updateStarship
-      description: update a starship
-      # define the parameters
-      parameters:
-        - name: id
-          description: Starship id
-          type: string
-          in: path
-          required: true
-        - name: model
-          description: Starship properties
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Starship"
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GeneralResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"   
-    delete:
-      operationId: deleteStarship
-      description: delete a starship
-      # define the parameters
-      parameters:
-        - name: id
-          description: Starship id
-          type: string
-          in: path
-          required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GeneralResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"            
-  
+    $ref: api/swagger/paths/starship_id.yaml
   /films:
     x-swagger-router-controller: films
     get:

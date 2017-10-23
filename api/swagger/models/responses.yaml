@@ -1,0 +1,18 @@
+ErrorResponse:
+  required:
+    - message
+  properties:
+    message:
+      type: string
+GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: returns 1 if successful
+      description:
+        type: string
+        description: a short comment 
+    required:
+      - success
+      - description
