@@ -1,0 +1,45 @@
+x-swagger-router-controller: films
+# our controller name
+get:
+  operationId: getFilm
+  description: get a film
+  # define the type of response for Success "200" and Error
+  parameters:
+    - name: id
+      type: string
+      in: path
+      required: true
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/film.yaml#/Film"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"                      
+put:
+  operationId: updateFilm
+  description: update a film
+  # define the parameters
+  parameters:
+    - name: id
+      description: Film id
+      type: string
+      in: path
+      required: true
+    - name: model
+      description: Film properties
+      in: body
+      required: true
+      schema:
+        $ref: "../models/film.yaml#/FilmWithRelationship"
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/responses.yaml#/GeneralResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"               

@@ -4,6 +4,7 @@
 swagger:
 
   fittingsDirs: [ api/fittings ]
+  viewsDirs: [ api/fittings ]
   defaultPipe: null
   swaggerControllerPipe: swagger_controllers  # defines the standard processing pipe for controllers
 

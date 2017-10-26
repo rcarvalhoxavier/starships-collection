@@ -1,0 +1,35 @@
+x-swagger-router-controller: films
+get:
+  operationId: getFilms
+  summary: Get all films
+  description: get films list
+  responses:
+    200:
+      description: Success
+      schema:
+        $ref: "../models/film.yaml#/GetFilmsListResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"
+post:
+  operationId: saveFilm
+  summary: add new film
+  description: add a new film to the list
+  # movie info to be stored
+  parameters:
+    - name: model
+      description: Starship properties
+      in: body
+      required: true
+      schema:
+        $ref: "../models/film.yaml#/Film"
+  responses:
+    "200":
+      description: Success
+      schema:
+        $ref: "../models/responses.yaml#/GeneralResponse"
+    default:
+      description: Error
+      schema:
+        $ref: "../models/responses.yaml#/ErrorResponse"

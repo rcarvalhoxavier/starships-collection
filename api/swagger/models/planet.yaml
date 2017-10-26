@@ -1,0 +1,190 @@
+Planet:        
+    description: A Plante
+    type: object
+    title: Planet
+    required:
+      - name
+      - rotation_period
+      - orbital_period
+      - diameter
+      - climate
+      - gravity
+      - terrain
+      - surface_water
+      - population
+      - url
+    properties:
+        diameter:
+          type: string
+          description: The diameter of this planet in kilometers.
+        name:
+          type: string
+          description: The name of this planet.
+        orbital_period:
+          type: string
+          description: The number of standard days it takes for this planet to complete
+            a single orbit of its local star.
+        url:
+          format: uri
+          type: string
+          description: The hypermedia URL of this resource.
+        rotation_period:
+          type: string
+          description: The number of standard hours it takes for this planet to complete
+            a single rotation on its axis.
+        population:
+          type: string
+          description: The average populationof sentient beings inhabiting this planet.
+        terrain:
+          type: string
+          description: the terrain of this planet. Comma-seperated if diverse.
+        gravity:
+          type: string
+          description: A number denoting the gravity of this planet. Where 1 is normal.
+        climate:
+          type: string
+          description: The climate of this planet. Comma-seperated if diverse.
+        surface_water:
+          type: string
+          description: The percentage of the planet surface that is naturally occuring water
+            or bodies of water.
+PlanetWithRelationship:       
+    description: A Plante
+    type: object
+    title: Planet
+    required:
+      - name
+      - rotation_period
+      - orbital_period
+      - diameter
+      - climate
+      - gravity
+      - terrain
+      - surface_water
+      - population
+      - url
+    properties:
+        diameter:
+          type: string
+          description: The diameter of this planet in kilometers.
+        name:
+          type: string
+          description: The name of this planet.
+        orbital_period:
+          type: string
+          description: The number of standard days it takes for this planet to complete
+            a single orbit of its local star.
+        url:
+          format: uri
+          type: string
+          description: The hypermedia URL of this resource.
+        rotation_period:
+          type: string
+          description: The number of standard hours it takes for this planet to complete
+            a single rotation on its axis.
+        population:
+          type: string
+          description: The average populationof sentient beings inhabiting this planet.
+        terrain:
+          type: string
+          description: the terrain of this planet. Comma-seperated if diverse.
+        gravity:
+          type: string
+          description: A number denoting the gravity of this planet. Where 1 is normal.
+        climate:
+          type: string
+          description: The climate of this planet. Comma-seperated if diverse.
+        surface_water:
+          type: string
+          description: The percentage of the planet surface that is naturally occuring water
+            or bodies of water.
+        films:
+          description: An array of Film URL Resources that this planet has appeared in.
+          type: array
+          items: 
+            type: integer 
+        people:
+          description: An array of People URL Resources that live on this planet.
+          type: array
+          items: 
+            type: integer 
+  GetPlanetsListResponse:
+      required:
+        - planets
+      properties:
+        # The array of sharship
+        planets:
+          type: array
+          items: 
+            $ref: '#/Planet'  
+
+
+
+
+
+
+            ---
+description: A planet.
+type: object
+properties:
+  terrain:
+    description: the terrain of this planet. Comma-seperated if diverse.
+    type: string
+
+  rotation_period:
+    description: The number of standard hours it takes for this planet to complete
+      a single rotation on its axis.
+    type: string
+  gravity:
+    description: A number denoting the gravity of this planet. Where 1 is normal.
+    type: string
+  population:
+    description: The average populationof sentient beings inhabiting this planet.
+    type: string
+  url:
+    description: The hypermedia URL of this resource.
+    format: uri
+    type: string
+  diameter:
+    description: The diameter of this planet in kilometers.
+    type: string
+  orbital_period:
+    description: The number of standard days it takes for this planet to complete
+      a single orbit of its local star.
+    type: string
+  edited:
+    description: the ISO 8601 date format of the time that this resource was edited.
+    format: date-time
+    type: string
+  surface_water:
+    description: The percentage of the planet surface that is naturally occuring water
+      or bodies of water.
+    type: string
+  name:
+    description: The name of this planet.
+    type: string
+  created:
+    description: The ISO 8601 date format of the time that this resource was created.
+    format: date-time
+    type: string
+  climate:
+    description: The climate of this planet. Comma-seperated if diverse.
+    type: string
+  
+required:
+- name
+- rotation_period
+- orbital_period
+- diameter
+- climate
+- gravity
+- terrain
+- surface_water
+- population
+- residents
+- films
+- created
+- edited
+- url
+"$schema": http://json-schema.org/draft-04/schema
+title: Planet

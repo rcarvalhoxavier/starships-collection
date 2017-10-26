@@ -1,0 +1,122 @@
+People:        
+    description: A People
+    type: object
+    title: People
+    required:
+    - name
+    - height
+    - mass
+    - hair_color
+    - skin_color
+    - eye_color
+    - birth_year
+    - gender
+    - url
+    properties:
+        birth_year:
+          type: string
+          description: The birth year of this person. BBY (Before the Battle of Yavin) or
+            ABY (After the Battle of Yavin).
+        mass:
+          type: string
+          description: The mass of this person in kilograms.
+        skin_color:
+          type: string
+          description: The skin color of this person.
+        name:
+          type: string
+          description: The name of this person.
+        hair_color:
+          type: string
+          description: The hair color of this person.
+        height:
+          type: string
+          description: The height of this person in meters.
+        eye_color:
+          type: string
+          description: The eye color of this person.
+        gender:
+          type: string
+          description: The gender of this person (if known).
+        url:
+          format: uri
+          type: string
+          description: The url of this resource
+PeopleWithRelationship:  
+    description: A People
+    type: object
+    title: People
+    required:
+    - name
+    - height
+    - mass
+    - hair_color
+    - skin_color
+    - eye_color
+    - birth_year
+    - gender
+    - url
+    properties:
+        birth_year:
+          type: string
+          description: The birth year of this person. BBY (Before the Battle of Yavin) or
+            ABY (After the Battle of Yavin).
+        mass:
+          type: string
+          description: The mass of this person in kilograms.
+        skin_color:
+          type: string
+          description: The skin color of this person.
+        name:
+          type: string
+          description: The name of this person.
+        hair_color:
+          type: string
+          description: The hair color of this person.
+        height:
+          type: string
+          description: The height of this person in meters.
+        eye_color:
+          type: string
+          description: The eye color of this person.
+        gender:
+          type: string
+          description: The gender of this person (if known).
+        url:
+          format: uri
+          type: string
+          description: The url of this resource
+        films:
+          type: array
+          description: An array of urls of film resources that this person has been in.
+          items: 
+            type: integer 
+        vehicles:
+          type: array
+          description: An array of vehicle resources that this person has piloted
+          items: 
+            type: integer 
+        starships:
+          type: array
+          description: An array of starship resources that this person has piloted
+          items: 
+            type: integer 
+        species:
+          description: The url of the species resource that this person is.
+          type: array
+          items: 
+            type: integer 
+        planet:
+          description: The url of the planet resource that this person was born on.
+          type: integer
+GetFilmsListResponse:
+      required:
+        - people
+      properties:
+        # The array of sharship
+        films:
+          type: array
+          items: 
+            $ref: '#/People' 
+
+

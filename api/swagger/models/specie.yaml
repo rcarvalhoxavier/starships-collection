@@ -1,0 +1,123 @@
+Specie:        
+    description: A Specie
+    type: object
+    title: Specie
+    required:
+      - name
+      - classification
+      - designation
+      - average_height
+      - average_lifespan
+      - hair_colors
+      - skin_colors
+      - eye_colors
+      - language
+      - url
+    properties:
+      classification:
+        type: string
+        description: The classification of this species.
+      name:
+        type: string
+        description: The name of this species.
+      url:
+        format: uri
+        type: string
+        description: The hypermedia URL of this resource.
+      hair_colors:
+        type: string
+        description: A comma-seperated string of common hair colors for this species,
+          none if this species does not typically have hair.
+      eye_colors:
+        type: string
+        description: A comma-seperated string of common eye colors for this species, none
+          if this species does not typically have eyes.
+      language:
+        type: string
+        description: The language commonly spoken by this species.
+      designation:
+        type: string
+        description: The designation of this species.
+      average_height:
+        type: string
+        description: The average height of this person in centimeters.
+      average_lifespan:
+        type: string
+        description: The average lifespan of this species in years.
+      skin_colors:
+        type: string
+        description: A comma-seperated string of common skin colors for this species,
+          none if this species does not typically have skin.
+SpecieWithRelationship: 
+    description: A Specie
+    type: object
+    title: Specie
+    required:
+      - name
+      - classification
+      - designation
+      - average_height
+      - average_lifespan
+      - hair_colors
+      - skin_colors
+      - eye_colors
+      - language
+      - url
+    properties:
+      classification:
+        type: string
+        description: The classification of this species.
+      name:
+        type: string
+        description: The name of this species.
+      url:
+        format: uri
+        type: string
+        description: The hypermedia URL of this resource.
+      hair_colors:
+        type: string
+        description: A comma-seperated string of common hair colors for this species,
+          none if this species does not typically have hair.
+      eye_colors:
+        type: string
+        description: A comma-seperated string of common eye colors for this species, none
+          if this species does not typically have eyes.
+      language:
+        type: string
+        description: The language commonly spoken by this species.
+      designation:
+        type: string
+        description: The designation of this species.
+      average_height:
+        type: string
+        description: The average height of this person in centimeters.
+      average_lifespan:
+        type: string
+        description: The average lifespan of this species in years.
+      skin_colors:
+        type: string
+        description: A comma-seperated string of common skin colors for this species,
+          none if this species does not typically have skin.
+      people:
+        description: An array of People URL Resources that are a part of this species.
+        type: array
+        items: 
+            type: integer 
+      films:
+        description: " An array of Film URL Resources that this species has appeared in."
+        type: array
+        items: 
+            type: integer 
+      planet:
+        description: The URL of a planet resource, a planet that this species originates from.
+        type: integer          
+  GetSpecieListResponse:
+      required:
+        - species
+      properties:
+        # The array of sharship
+        species:
+          type: array
+          items: 
+            $ref: '#/Specie' 
+

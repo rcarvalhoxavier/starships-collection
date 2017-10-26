@@ -1,0 +1,133 @@
+Vehicle:        
+    description: A Vehicle
+    type: object
+    title: Vehicle
+    required:
+    - name
+    - model
+    - manufacturer
+    - cost_in_credits
+    - length
+    - max_atmosphering_speed
+    - crew
+    - passengers
+    - cargo_capacity
+    - consumables
+    - vehicle_class
+    - url
+    properties:
+      cost_in_credits:
+        type: string
+        description: The cost of this vehicle new, in galactic credits.
+      cargo_capacity:
+        type: string
+        description: The maximum number of kilograms that this vehicle can transport.
+      name:
+        type: string
+        description: The name of this vehicle. The common name, such as Sand Crawler.
+      model:
+        type: string
+        description: The model or official name of this vehicle. Such as All Terrain Attack
+          Transport.
+      consumables:
+        type: string
+        description: The maximum length of time that this vehicle can provide consumables
+          for its entire crew without having to resupply.
+      url:
+        format: uri
+        type: string
+        description: The hypermedia URL of this resource.
+      passengers:
+        type: string
+        description: The number of non-essential people this vehicle can transport.
+      manufacturer:
+        type: string
+        description: The manufacturer of this vehicle. Comma seperated if more than one.
+      length:
+        type: string
+        description: The length of this vehicle in meters.
+      max_atmosphering_speed:
+        type: string
+        description: The maximum speed of this vehicle in atmosphere.
+      crew:
+        type: string
+        description: The number of personnel needed to run or pilot this vehicle.
+      vehicle_class:
+        type: string
+        description: The class of this vehicle, such as Wheeled.  
+VehicleWithRelationship:    
+    description: A Vehicle
+    type: object
+    title: Vehicle
+    required:
+    - name
+    - model
+    - manufacturer
+    - cost_in_credits
+    - length
+    - max_atmosphering_speed
+    - crew
+    - passengers
+    - cargo_capacity
+    - consumables
+    - vehicle_class
+    - url
+    properties:
+      cost_in_credits:
+        type: string
+        description: The cost of this vehicle new, in galactic credits.
+      cargo_capacity:
+        type: string
+        description: The maximum number of kilograms that this vehicle can transport.
+      name:
+        type: string
+        description: The name of this vehicle. The common name, such as Sand Crawler.
+      model:
+        type: string
+        description: The model or official name of this vehicle. Such as All Terrain Attack
+          Transport.
+      consumables:
+        type: string
+        description: The maximum length of time that this vehicle can provide consumables
+          for its entire crew without having to resupply.
+      url:
+        format: uri
+        type: string
+        description: The hypermedia URL of this resource.
+      passengers:
+        type: string
+        description: The number of non-essential people this vehicle can transport.
+      manufacturer:
+        type: string
+        description: The manufacturer of this vehicle. Comma seperated if more than one.
+      length:
+        type: string
+        description: The length of this vehicle in meters.
+      max_atmosphering_speed:
+        type: string
+        description: The maximum speed of this vehicle in atmosphere.
+      crew:
+        type: string
+        description: The number of personnel needed to run or pilot this vehicle.
+      vehicle_class:
+        type: string
+        description: The class of this vehicle, such as Wheeled.  
+      films:
+        description: An array of Film URL Resources that this vehicle has appeared in.
+        type: array
+        items: 
+            type: integer
+      pilots:
+        description: An array of People URL Resources that this vehicle has been piloted  by.
+        type: array
+        items: 
+            type: integer
+GetVehicleListResponse:
+    required:
+      - vehicles
+    properties:
+      # The array of sharship
+      vehicles:
+        type: array
+        items: 
+          $ref: '#/Vehicle' 

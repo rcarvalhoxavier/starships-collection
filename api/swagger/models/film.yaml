@@ -1,0 +1,102 @@
+Film:        
+    description: A Film
+    type: object
+    title: Film
+    required:
+    - title
+    - episode_id
+    - opening_crawl
+    - director
+    - producer
+    - release_date
+    - url
+    properties:        
+      episode_id:
+        type: integer
+        description: The episode number of this film.
+      director:
+        type: string
+        description: The director of this film.
+      opening_crawl:
+        type: string
+        description: The opening crawl text at the beginning of this film.
+      title:
+        type: string
+        description: The title of this film.
+      release_date:
+        type: string
+        description: The release date at original creator country.
+        format: date-time
+      url:
+        type: string
+        description: The url of this resource
+        format: uri
+      producer:
+        type: string
+        description: The producer(s) of this film. 
+
+FilmWithRelationship:        
+    description: A Film
+    type: object
+    title: Film
+    required:
+    - title
+    - episode_id
+    - opening_crawl
+    - director
+    - producer
+    - release_date
+    - url
+    properties:        
+      episode_id:
+        type: integer
+        description: The episode number of this film.
+      director:
+        type: string
+        description: The director of this film.
+      opening_crawl:
+        type: string
+        description: The opening crawl text at the beginning of this film.
+      title:
+        type: string
+        description: The title of this film.
+      release_date:
+        type: string
+        description: The release date at original creator country.
+        format: date-time
+      url:
+        type: string
+        description: The url of this resource
+        format: uri
+      producer:
+        type: string
+        description: The producer(s) of this film.
+      people:
+          type: array
+          items: 
+            type: integer 
+      starships:
+          type: array
+          items: 
+            type: integer 
+      vehicles:
+          type: array
+          items: 
+            type: integer
+      planets:
+          type: array
+          items: 
+            type: integer 
+      species:
+          type: array
+          items: 
+            type: integer 
+GetFilmsListResponse:
+      required:
+        - films
+      properties:
+        # The array of sharship
+        films:
+          type: array
+          items: 
+            $ref: '#/Film'  
