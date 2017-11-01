@@ -43,7 +43,7 @@ class Planets {
                         {
                             model: db.Film,
                             require: false,
-                            attributes: ['id', 'name', 'url']
+                            attributes: ['id', 'title', 'url']
                         }],
                     where: { id: _id }
                 })
@@ -86,7 +86,7 @@ class Planets {
         });
     }
 
-    update(_id, data, films, peoples) {
+    update(_id, data, films, people) {
         return new Promise((resolve, reject) => {
             db.Planet
                 .update(data, {
@@ -101,8 +101,8 @@ class Planets {
                         this.get(_id).then((planet) => {
                             if (films != undefined && films.length > 0)
                                 promiseList.push(planet.setFilms(films));
-                            if (peoples != undefined && peoples.length > 0)
-                                promiseList.push(planet.setPeople(peoples));
+                            if (people != undefined && people.length > 0)
+                                promiseList.push(planet.setPeople(people));
                             Promise.all(promiseList).then(() => {
                                 resolve(res);
                             }).catch((error) => {

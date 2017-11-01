@@ -1,28 +1,29 @@
-x-swagger-router-controller: films
+x-swagger-router-controller: people
 get:
-  operationId: getFilms
-  summary: Get all films
-  description: get films list
+  operationId: getPeopleList
+  summary: Get all people
+  description: get people list
   responses:
     200:
       description: Success
       schema:
-        $ref: "../models/film.yaml#/GetFilmsListResponse"
+        $ref: "../models/people.yaml#/GetPeopleListResponse"
     default:
       description: Error
       schema:
         $ref: "../models/responses.yaml#/ErrorResponse"
 post:
-  operationId: saveFilm
-  summary: add new film
-  description: add a new film to the list  
+  operationId: savePeople
+  summary: add new people
+  description: add a new people to the list 
+  # movie info to be stored
   parameters:
     - name: model
-      description: Film properties
+      description: People properties
       in: body
       required: true
       schema:
-        $ref: "../models/film.yaml#/Film"
+        $ref: "../models/people.yaml#/People"
   responses:
     "200":
       description: Success

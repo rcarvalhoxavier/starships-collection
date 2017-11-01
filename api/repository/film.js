@@ -5,7 +5,7 @@ const db = require(`${appRoot}/api/models`);
 
 class Films {
 
-    add(entity, starships) {
+    add(entity) {
         return new Promise((resolve, reject) => {
             db.Film
                 .create(entity).then((res) => {

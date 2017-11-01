@@ -18,7 +18,7 @@ People:
           description: The birth year of this person. BBY (Before the Battle of Yavin) or
             ABY (After the Battle of Yavin).
         mass:
-          type: string
+          type: integer
           description: The mass of this person in kilograms.
         skin_color:
           type: string
@@ -62,7 +62,7 @@ PeopleWithRelationship:
           description: The birth year of this person. BBY (Before the Battle of Yavin) or
             ABY (After the Battle of Yavin).
         mass:
-          type: string
+          type: integer
           description: The mass of this person in kilograms.
         skin_color:
           type: string
@@ -109,12 +109,12 @@ PeopleWithRelationship:
         planet:
           description: The url of the planet resource that this person was born on.
           type: integer
-GetFilmsListResponse:
+GetPeopleListResponse:
       required:
         - people
       properties:
         # The array of sharship
-        films:
+        people:
           type: array
           items: 
             $ref: '#/People' 

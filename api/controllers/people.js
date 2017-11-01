@@ -17,44 +17,45 @@ const _planetRepository = new PlanetRepository();
 const _specieRepository = new SpecieRepository();
 const _vehicleRepository = new VehicleRepository();
 
-module.exports = { getFilms, saveFilm, getFilm, updateFilm, deleteFilm };
+module.exports = { getPeopleList, savePeople, getPeople, updatePeople, deletePeople };
 
 
-//POST /film operationId
-function saveFilm(req, res, next) {
+//POST /people operationId
+function savePeople(req, res, next) {
     var entity = req.body;
-    _filmRepository.add(entity).then((data) => {
-        res.json({ success: 1, description: "film criada!" });
+    _peopleRepository.add(entity).then((data) => {
+        res.json({ success: 1, description: "people criada!" });
     }).catch((error) => {
         res.status(204).json({ message: `${error}` });
     });
 }
 
-//GET /film operationId
-function getFilms(req, res, next) {
-    _filmRepository.list().then((data) => {
+//GET /people operationId
+function getPeopleList(req, res, next) {
+    _peopleRepository.list().then((data) => {
         res.json(data);
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });
     });
 }
 
-function getFilm(req, res, next) {
+function getPeople(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters    
-    _filmRepository.get(id).then((data) => {
-        data.dataValues.films = data.films;
+    _peopleRepository.get(id).then((data) => {        
+        data.dataValues.people = data.people;
         if (data <= 0) {
             res.sendStatus(404);
-        } else {
+        } else {            
             res.json(data);
         }
     }).catch((error) => {
+        console.log(error);
         res.status(204).send(error);
     });
 }
 
-//PUT /film/{id} operationId
-function updateFilm(req, res, next) {
+//PUT /people/{id} operationId
+function updatePeople(req, res, next) {
     var entity = req.body;
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
 
@@ -62,12 +63,10 @@ function updateFilm(req, res, next) {
     promiseList.push(Promise.all(entity.starships.map((item) => {
         return _starshipRepository.get(item);
     })));
-    promiseList.push(Promise.all(entity.people.map((item) => {
-        return _peopleRepository.get(item);
+    promiseList.push(Promise.all(entity.films.map((item) => {
+        return _filmRepository.get(item);
     })));
-    promiseList.push(Promise.all(entity.planets.map((item) => {
-        return _planetRepository.get(item);
-    })));
+    promiseList.push(_planetRepository.get(entity.planet));
     promiseList.push(Promise.all(entity.vehicles.map((item) => {
         return _vehicleRepository.get(item);
     })));
@@ -76,17 +75,17 @@ function updateFilm(req, res, next) {
     })));
     Promise.all(promiseList).then((results) => {        
         var starships = _.compact(results[0]);
-        var people = _.compact(results[1]);
-        var planets = _.compact(results[2]);
+        var film = _.compact(results[1]);
+        var planet = results[2];
         var vehicles = _.compact(results[3]);
         var species = _.compact(results[4]);
 
-        return _filmRepository.update(id, entity, people, planets, starships, vehicles, species);
+        return _peopleRepository.update(id, entity, films, planet, starships, vehicles, species);
     }).then((data) => {
         if (data <= 0) {
             res.status(404).json({ message: "Não encontrado" });
         } else {
-            res.json({ success: 1, description: "film updated!" });
+            res.json({ success: 1, description: "people updated!" });
         }
     }).catch((error) => {
         console.log(error);
@@ -94,13 +93,13 @@ function updateFilm(req, res, next) {
     });
 }
 
-function deleteFilm(req, res, next) {
+function deletePeople(req, res, next) {
     var id = req.swagger.params.id.value; //req.swagger contains the path parameters
-    _filmRepository.remove(id).then((data) => {
+    _peopleRepository.remove(id).then((data) => {
         if (data <= 0) {
             res.status(404).json({ message: "Não encontrado" });
         } else {
-            res.json({ success: 1, description: "film deleted!" });
+            res.json({ success: 1, description: "people deleted!" });
         }
     }).catch((error) => {
         res.status(400).json({ message: `${error}` });

@@ -111,13 +111,13 @@ SpecieWithRelationship:
       planet:
         description: The URL of a planet resource, a planet that this species originates from.
         type: integer          
-  GetSpecieListResponse:
-      required:
-        - species
-      properties:
-        # The array of sharship
-        species:
-          type: array
-          items: 
-            $ref: '#/Specie' 
+GetSpeciesListResponse:
+    required:
+      - species
+    properties:
+      # The array of sharship
+      species:
+        type: array
+        items: 
+          $ref: '#/Specie' 
 

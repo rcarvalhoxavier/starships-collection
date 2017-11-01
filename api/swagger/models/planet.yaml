@@ -108,12 +108,12 @@ PlanetWithRelationship:
           type: array
           items: 
             type: integer 
-  GetPlanetsListResponse:
-      required:
-        - planets
-      properties:
-        # The array of sharship
-        planets:
-          type: array
-          items: 
-            $ref: '#/Planet'  
+GetPlanetsListResponse:
+    required:
+      - planets
+    properties:
+      # The array of sharship
+      planets:
+        type: array
+        items: 
+          $ref: '#/Planet'  

@@ -1,28 +1,29 @@
-x-swagger-router-controller: films
+x-swagger-router-controller: planets
 get:
-  operationId: getFilms
-  summary: Get all films
-  description: get films list
+  operationId: getPlanets
+  summary: Get all planets
+  description: get planets list
   responses:
     200:
       description: Success
       schema:
-        $ref: "../models/film.yaml#/GetFilmsListResponse"
+        $ref: "../models/planet.yaml#/GetPlanetsListResponse"
     default:
       description: Error
       schema:
         $ref: "../models/responses.yaml#/ErrorResponse"
 post:
-  operationId: saveFilm
-  summary: add new film
-  description: add a new film to the list  
+  operationId: savePlanet
+  summary: add new planet
+  description: add a new planet to the list 
+  # movie info to be stored
   parameters:
     - name: model
-      description: Film properties
+      description: Planet properties
       in: body
       required: true
       schema:
-        $ref: "../models/film.yaml#/Film"
+        $ref: "../models/planet.yaml#/Planet"
   responses:
     "200":
       description: Success

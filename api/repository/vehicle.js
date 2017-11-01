@@ -37,7 +37,7 @@ class Vehicles {
                     include: [{
                         model: db.Film,
                         require: false,
-                        attributes: ['id', 'name', 'url']
+                        attributes: ['id', 'title', 'url']
                     },
                     {
                         model: db.People,
@@ -85,7 +85,7 @@ class Vehicles {
         });
     }
 
-    update(_id, data, films) {
+    update(_id, data, films, people) {
         return new Promise((resolve, reject) => {
             db.Vehicle
                 .update(data, {
@@ -100,6 +100,8 @@ class Vehicles {
                         this.get(_id).then((entity) => {
                             if (films != undefined && films.length > 0)
                                 promiseList.push(entity.setFilms(films));
+                            if (people != undefined && people.length > 0)
+                                promiseList.push(entity.setPeople(people));                                
                             Promise.all(promiseList).then(() => {
                                 resolve(res);
                             }).catch((error) => {

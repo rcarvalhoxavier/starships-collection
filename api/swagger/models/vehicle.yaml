@@ -117,12 +117,12 @@ VehicleWithRelationship:
         type: array
         items: 
             type: integer
-      pilots:
+      people:
         description: An array of People URL Resources that this vehicle has been piloted  by.
         type: array
         items: 
             type: integer
-GetVehicleListResponse:
+GetVehiclesListResponse:
     required:
       - vehicles
     properties:

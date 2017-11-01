@@ -1,8 +1,8 @@
-x-swagger-router-controller: films
+x-swagger-router-controller: vehicles
 # our controller name
 get:
-  operationId: getFilm
-  description: get a film
+  operationId: getVehicle
+  description: get a vehicle
   # define the type of response for Success "200" and Error
   parameters:
     - name: id
@@ -13,27 +13,27 @@ get:
     "200":
       description: Success
       schema:
-        $ref: "../models/film.yaml#/Film"
+        $ref: "../models/vehicle.yaml#/Vehicle" 
     default:
       description: Error
       schema:
-        $ref: "../models/responses.yaml#/ErrorResponse"                      
+        $ref: "../models/responses.yaml#/ErrorResponse"
 put:
-  operationId: updateFilm
-  description: update a film
+  operationId: updateVehicle
+  description: update a vehicle
   # define the parameters
   parameters:
     - name: id
-      description: Film id
+      description: Vehicle id
       type: string
       in: path
       required: true
     - name: model
-      description: Film properties
+      description: Vehicle properties
       in: body
       required: true
       schema:
-        $ref: "../models/film.yaml#/FilmWithRelationship"
+        $ref: "../models/vehicle.yaml#/VehicleWithRelationship"
   responses:
     "200":
       description: Success
@@ -42,14 +42,14 @@ put:
     default:
       description: Error
       schema:
-        $ref: "../models/responses.yaml#/ErrorResponse"           
+        $ref: "../models/responses.yaml#/ErrorResponse"
 delete:
-  operationId: deleteFilm
-  description: delete a film
+  operationId: deleteVehicle
+  description: delete a vehicle
   # define the parameters
   parameters:
     - name: id
-      description: Film id
+      description: Vehicle id
       type: string
       in: path
       required: true
@@ -61,4 +61,4 @@ delete:
     default:
       description: Error
       schema:
-        $ref: "../models/responses.yaml#/ErrorResponse"            
+        $ref: "../models/responses.yaml#/ErrorResponse"

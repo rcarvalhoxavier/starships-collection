@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Starships Collection
 # during dev, should point to your local machine
-host: localhost:10010
+host: arcane-dawn-31734.herokuapp.com
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -19,13 +19,29 @@ produces:
   - application/json
 paths:
   /starship:
-    $ref: 'http://localhost:10010/paths/starship.yaml'
+    $ref: 'http://arcane-dawn-31734.herokuapp.com/paths/starship.yaml'
   /starships/{id}:
-    $ref: http://localhost:10010/paths/starship_id.yaml
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/starship_id.yaml
   /films:
-    $ref: http://localhost:10010/paths/film.yaml             
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/film.yaml             
   /films/{id}:
-    $ref: http://localhost:10010/paths/film_id.yaml         
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/film_id.yaml       
+  /people:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/people.yaml             
+  /people/{id}:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/people_id.yaml          
+  /vehicles:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/vehicle.yaml             
+  /vehicles/{id}:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/vehicle_id.yaml       
+  /planets:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/planet.yaml             
+  /planets/{id}:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/planet_id.yaml     
+  /species:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/specie.yaml             
+  /species/{id}:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/specie_id.yaml  
   /seeds:
     x-swagger-router-controller: seeds
     get:

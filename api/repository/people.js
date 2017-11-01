@@ -43,7 +43,7 @@ class People {
                         {
                             model: db.Film,
                             require: false,
-                            attributes: ['id', 'name', 'url']
+                            attributes: ['id', 'title', 'url']
                         },
                         {
                             model: db.Planet,

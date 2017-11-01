@@ -48,7 +48,7 @@ class Species {
                         {
                             model: db.Film,
                             require: false,
-                            attributes: ['id', 'name', 'url']
+                            attributes: ['id', 'title', 'url']
                         } ],
                     where: { id: _id }
                 })
