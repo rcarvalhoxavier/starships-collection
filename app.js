@@ -23,13 +23,6 @@ app.set('views', 'public');
 app.set('port', port);
 
 
-
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 app.use("/paths", express.static(`${appRoot}/api/swagger/paths`));
 app.use("/models", express.static(`${appRoot}/api/swagger/models`));
 

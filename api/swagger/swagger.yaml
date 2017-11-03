@@ -20,6 +20,29 @@ produces:
 paths:
   /starship:
     $ref: 'https://arcane-dawn-31734.herokuapp.com/paths/starship.yaml'
+  /starships/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/starship_id.yaml
+  /films:
+    $ref: http://arcane-dawn-31734.herokuapp.com/paths/film.yaml             
+  /films/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/film_id.yaml       
+  /people:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/people.yaml             
+  /people/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/people_id.yaml          
+  /vehicles:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/vehicle.yaml             
+  /vehicles/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/vehicle_id.yaml       
+  /planets:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/planet.yaml             
+  /planets/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/planet_id.yaml     
+  /species:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/specie.yaml             
+  /species/{id}:
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/specie_id.yaml  
+
   
   /seeds:
     x-swagger-router-controller: seeds
