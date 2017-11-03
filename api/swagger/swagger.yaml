@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Starships Collection
 # during dev, should point to your local machine
-host: arcane-dawn-31734.herokuapp.com
+host: 'arcane-dawn-31734.herokuapp.com'
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -19,7 +19,7 @@ produces:
   - application/json
 paths:
   /starship:
-    $ref: 'api/swagger/paths/starship.yaml'
+    $ref: 'http://arcane-dawn-31734.herokuapp.com/paths/starship.yaml'
   
   /seeds:
     x-swagger-router-controller: seeds
