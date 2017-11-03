@@ -19,7 +19,7 @@ produces:
   - application/json
 paths:
   /starship:
-    $ref: 'http://arcane-dawn-31734.herokuapp.com/paths/starship.yaml'
+    $ref: 'https://arcane-dawn-31734.herokuapp.com/paths/starship.yaml'
   
   /seeds:
     x-swagger-router-controller: seeds
