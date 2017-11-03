@@ -23,7 +23,7 @@ paths:
   /starships/{id}:
     $ref: https://arcane-dawn-31734.herokuapp.com/paths/starship_id.yaml
   /films:
-    $ref: http://arcane-dawn-31734.herokuapp.com/paths/film.yaml             
+    $ref: https://arcane-dawn-31734.herokuapp.com/paths/film.yaml             
   /films/{id}:
     $ref: https://arcane-dawn-31734.herokuapp.com/paths/film_id.yaml       
   /people:
