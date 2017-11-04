@@ -117,7 +117,7 @@ class People {
                             if (starships != undefined && starships.length > 0)
                                 promiseList.push(people.setStarships(starships));
                             if (films != undefined && films.length > 0)
-                                promiseList.push(people.setFilms(films));
+                                promiseList.push(people.setFilms(films));                                
                             if (planet != undefined && planet != null)
                                 promiseList.push(people.setPlanet(planet));
                             if (vehicles != undefined && vehicles.length > 0)

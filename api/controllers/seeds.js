@@ -44,9 +44,9 @@ function populate(req, res, next) {
         ]).then(() => {
             console.log("resolve ");
             return Promise.all([
-                buildFilmRelationshipFilm(),
-              //  buildFilmRelationshipPeople(),
-                buildFilmRelationshipSpecie()])
+                buildFilmRelationship(),
+                buildRelationshipPeople(),
+                buildRelationshipSpecie()])
         }).then(() => {
             res.json({ success: 1, description: "populate executado com sucesso!" });
 
@@ -188,7 +188,7 @@ function saveVehicle(element) {
     });
 }
 
-function buildFilmRelationshipFilm() {
+function buildFilmRelationship() {
     new Promise((resolve, reject) => {
         _filmRepository.list().then((films) => {
             films.forEach(function (film) {
@@ -234,7 +234,7 @@ function buildFilmRelationshipFilm() {
     });
 }
 
-function buildFilmRelationshipPeople() {
+function buildRelationshipPeople() {
     new Promise((resolve, reject) => {
         _peopleRepository.list().then((entity) => {
             entity.forEach(function (item) {
@@ -243,7 +243,7 @@ function buildFilmRelationshipPeople() {
                     var promiseList = [];
                     promiseList.push(Promise.all(result.starships.map((_url) => {
                         return _starshipRepository.getByUrl(_url);
-                    })));
+                    })));                    
                     promiseList.push(_planetRepository.getByUrl(result.homeworld));
                     promiseList.push(Promise.all(result.vehicles.map((_url) => {
                         return _vehicleRepository.getByUrl(_url);
@@ -256,8 +256,7 @@ function buildFilmRelationshipPeople() {
                         var starships = _.compact(results[0]);
                         var planet = results[1];
                         var vehicles = _.compact(results[2]);
-                        var species = _.compact(results[3]);
-
+                        var species = _.compact(results[3]);                        
                         return _peopleRepository.update(item.id, item, undefined, planet, starships, vehicles, species);
                     });
                 }).then((data) => {
@@ -274,7 +273,7 @@ function buildFilmRelationshipPeople() {
     });
 }
 
-function buildFilmRelationshipSpecie() {
+function buildRelationshipSpecie() {
     new Promise((resolve, reject) => {
         _specieRepository.list().then((entity) => {
             entity.forEach(function (item) {
