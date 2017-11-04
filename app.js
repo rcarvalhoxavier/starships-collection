@@ -23,9 +23,7 @@ app.set('views', 'public');
 app.set('port', port);
 
 
-//app.use("/paths", express.static(`${appRoot}/api/swagger/paths`));
 app.use("/api/swagger/paths", express.static(`${appRoot}/api/swagger/paths`));
-//app.use("/models", express.static(`${appRoot}/api/swagger/models`));
 app.use("/api/swagger/models", express.static(`${appRoot}/api/swagger/models`));
 
 // database

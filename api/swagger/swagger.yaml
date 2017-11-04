@@ -9,7 +9,6 @@ basePath: /
 # 
 schemes:
   # tip: remove http to make production-grade
-  - http 
   - https
 # format of bodies a client can send (Content-Type)
 consumes:
@@ -20,6 +19,29 @@ produces:
 paths:
   /starship:
     $ref: 'api/swagger/paths/starship.yaml'
+  /starships/{id}:
+    $ref: 'api/swagger/paths/starship_id.yaml'
+  /films:
+    $ref: 'api/swagger/paths/film.yaml'             
+  /films/{id}:
+    $ref: 'api/swagger/paths/film_id.yaml'      
+  /people:
+    $ref: 'api/swagger/paths/people.yaml'             
+  /people/{id}:
+    $ref: 'api/swagger/paths/people_id.yaml'          
+  /vehicles:
+    $ref: 'api/swagger/paths/vehicle.yaml'             
+  /vehicles/{id}:
+    $ref: 'api/swagger/paths/vehicle_id.yaml'       
+  /planets:
+    $ref: 'api/swagger/paths/planet.yaml'             
+  /planets/{id}:
+    $ref: 'api/swagger/paths/planet_id.yaml'     
+  /species:
+    $ref: 'api/swagger/paths/specie.yaml'             
+  /species/{id}:
+    $ref: 'api/swagger/paths/specie_id.yaml'  
+
   
   /seeds:
     x-swagger-router-controller: seeds
