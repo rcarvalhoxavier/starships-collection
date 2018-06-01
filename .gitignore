@@ -76,3 +76,13 @@ typings/
 
 # dotenv environment variables file
 .env
+
+.DS_Store
+
+.scannerwork/.sonar_lock
+
+.scannerwork/report-task.txt
+
+api/.DS_Store
+
+api/.DS_Store
