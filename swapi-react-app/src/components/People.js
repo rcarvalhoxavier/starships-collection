@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PeopleApi from '../api/PeopleApi';
 import ReactCSSTransitionGroup from 'react-transition-group';
+import PeopleSearch from '../components/PeopleSearch';
 
 
 export default class People extends Component {
@@ -13,10 +13,7 @@ export default class People extends Component {
 
   }
 
-  search(event) {
-    event.preventDefault();
-    this.props.route.store.dispatch(PeopleApi.search(this.searchText.value));
-  };
+
 
 
   componentWillMount() {
@@ -32,11 +29,7 @@ export default class People extends Component {
     console.log('render');
     return (
       <div className="content">
-        <form className="header-busca" onSubmit={this.search.bind(this)}>
-          <input type="text" name="search" placeholder="Pesquisa" className="header-busca-campo" ref={input => this.searchText = input} />
-          <input type="submit" value="Buscar" className="header-busca-submit" />
-        </form>
-
+        <PeopleSearch store={this.props.route.store} />
         <div>
           <table className="pure-table">
             <thead>
